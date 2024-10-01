@@ -1,5 +1,7 @@
 package FoodOrderingSystem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class meal {
@@ -17,8 +19,9 @@ public class meal {
         try (Scanner sc = new Scanner(System.in)) {
             int choice;
             String order = "";
+            List<String> orders = new ArrayList<>();
 
-            int total = 0;
+            double total = 0;
 
             while (!order.equalsIgnoreCase("n")) {
                 menu();
@@ -28,15 +31,23 @@ public class meal {
                 switch (choice) {
                     case 1:
                         total += 50;
+                        System.out.println("You added a Burger");
+                        orders.add("Burger");
                         break;
                     case 2:
                         total += 80;
+                        System.out.println("You added a Pizza");
+                        orders.add("Pizza");
                         break;
                     case 3:
                         total += 40;
+                        System.out.println("You added a Sandwich");
+                        orders.add("Sandwich");
                         break;
                     case 4:
                         total += 20;
+                        System.out.println("You added a Coke");
+                        orders.add("Coke");
                         break;
                     case 5:
                         order = "n";
@@ -49,8 +60,9 @@ public class meal {
                 System.out.println("Would you like to order anything else? (y/n)");
                 order = sc.nextLine();
             }
-            System.out.println("Your total is:" + total + "\nThank you for your order!");
-            sc.close();
+            System.out.print("You ordered a ");
+            System.out.println(orders);
+            System.out.println("Your total is: ₹" + total + "\nThank you for your order!");
         }
     }
 
