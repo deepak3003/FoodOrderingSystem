@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class meal {
+public class MealOrderingSystem {
 
     public static void menu() {
         System.out.println("1. Burger - ₹50.00");
