@@ -3,6 +3,7 @@ package FoodOrderingSystem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 class Menu {
     public void displayMenu() {
@@ -61,9 +62,9 @@ public class MealOrderingSystem {
         Menu menu = new Menu();
         Order order = new Order();
         try (Scanner sc = new Scanner(System.in)) {
+            AtomicBoolean orderMore = new AtomicBoolean(true);
 
-            String orderMore = "";
-            while (!orderMore.equalsIgnoreCase("n")) {
+            while (orderMore.get()) {
                 menu.displayMenu();
                 System.out.print("Please select an item (1-5): ");
                 int choice = sc.nextInt();
@@ -73,7 +74,10 @@ public class MealOrderingSystem {
                 order.addItem(choice);
                 sc.nextLine();
                 System.out.println("Would you like to order anything else? (y/n)");
-                orderMore = sc.nextLine();
+                String userResponse = sc.nextLine();
+                if(userResponse.equalsIgnoreCase("n")){
+                    orderMore.set(false);
+                }
             }
             order.displayOrder();
 
