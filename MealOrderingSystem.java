@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+
 class Menu {
     public void displayMenu() {
         System.out.println("1. Burger - ₹50.00");
@@ -49,10 +50,54 @@ class Order {
         }
     }
 
+    public double getTotal() {
+        return total;
+    }
+
     public void displayOrder() {
         System.out.print("You ordered a ");
         System.out.println(orders);
-        System.out.println("Your total is: ₹" + total + "\nThank you for your order!");
+        System.out.println("Your total is: ₹" + total);
+
+    }
+}
+
+class Payment {
+    public void payBill(double total) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please select payment method");
+        System.out.println("1. Cash");
+        System.out.println("2. Pay with UPI");
+        System.out.println("3. Credit/Debit Card");
+        int option = sc.nextInt();
+        sc.nextLine();
+        switch (option) {
+            case 1:
+                System.out.println("Please pay ₹" + total + "in cash.");
+                System.out.println("Payment successful! Thank you for your order.");
+                break;
+            case 2:
+                System.out.print("Enter your upi id: ");
+                String upiId = sc.nextLine();
+                System.out.println("Payment processing of ₹" + total + " from upi id" + " '"+upiId+ "'");
+                System.out.println("Payment successful! Thank you for your order.");
+                break;
+            case 3:
+                System.out.print("Enter your card number: ");
+                String cardNumber = sc.nextLine();
+                System.out.print("Enter expiration date MM/YY: ");
+                String expireDate = sc.nextLine();
+                System.out.print("Enter CVC number: ");
+                String cvcNumber = sc.nextLine();
+                System.out.println("Payment processing of ₹" + total);
+                System.out.println("Payment successful! Thank you for your order.");
+                break;
+
+            default:
+                System.out.println("Invalid selection.");
+
+
+        }
 
     }
 }
@@ -61,6 +106,7 @@ public class MealOrderingSystem {
     public static void main(String[] args) {
         Menu menu = new Menu();
         Order order = new Order();
+        Payment pay = new Payment();
         try (Scanner sc = new Scanner(System.in)) {
             AtomicBoolean orderMore = new AtomicBoolean(true);
 
@@ -75,11 +121,12 @@ public class MealOrderingSystem {
                 sc.nextLine();
                 System.out.println("Would you like to order anything else? (y/n)");
                 String userResponse = sc.nextLine();
-                if(userResponse.equalsIgnoreCase("n")){
+                if (userResponse.equalsIgnoreCase("n")) {
                     orderMore.set(false);
                 }
             }
             order.displayOrder();
+            pay.payBill(order.getTotal());
 
         }
     }
