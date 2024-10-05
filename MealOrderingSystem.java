@@ -1,5 +1,6 @@
 package FoodOrderingSystem;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +21,7 @@ class Menu {
 class Order {
     private final List<String> orders = new ArrayList<>();
     private double total = 0;
+    private int optionPay = 0;
 
     public void addItem(int choice) {
         switch (choice) {
@@ -54,32 +56,71 @@ class Order {
         return total;
     }
 
+    public int getOptionPay() {
+        return optionPay;
+    }
+
     public void displayOrder() {
         System.out.print("You ordered a ");
         System.out.println(orders);
         System.out.println("Your total is: ₹" + total);
+        total = applyCoupon(total);
+        System.out.println("Total after applying coupon ₹" + total);
 
     }
-}
 
-class Payment {
-    public void payBill(double total) {
+    public double applyCoupon(double total) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please select payment method");
-        System.out.println("1. Cash");
-        System.out.println("2. Pay with UPI");
-        System.out.println("3. Credit/Debit Card");
+        System.out.println("Choose coupon");
+        System.out.println("1. Welcome bonus 40% OFF.");
+        System.out.println("2. Flat ₹20 OFF using UPI");
+        System.out.println("3. 35% OFF up to ₹100 using credit card");
+
+
         int option = sc.nextInt();
         sc.nextLine();
         switch (option) {
             case 1:
-                System.out.println("Please pay ₹" + total + "in cash.");
+                total = total - (total * 40) / 100;
+
+                break;
+
+            case 2:
+                total = total - 20;  //Flat ₹20 off
+                optionPay = 2;
+                break;
+            case 3:
+                total = total - Math.min((total * 35) / 100, 100);  //35% off up to ₹100
+                optionPay = 3;
+                break;
+            default:
+                System.out.println("Invalid coupon selection. No coupon applied.");
+        }
+        return total;
+    }
+}
+
+class Payment {
+    public void payBill(double total, int option) {
+        Scanner sc = new Scanner(System.in);
+
+        if (option == 0) {
+            System.out.println("Please select payment method");
+            System.out.println("1. Cash");
+            System.out.println("2. Pay with UPI");
+            System.out.println("3. Credit/Debit Card");
+            option = sc.nextInt();
+            sc.nextLine();
+        }
+        switch (option) {
+            case 1:
+                System.out.println("Please pay ₹" + total + " in cash.");
                 System.out.println("Payment successful! Thank you for your order.");
                 break;
             case 2:
                 System.out.print("Enter your upi id: ");
                 String upiId = sc.nextLine();
-                System.out.println("Payment processing of ₹" + total + " from upi id" + " '"+upiId+ "'");
+                System.out.println("Payment processing of ₹" + total + " from upi id" + " '" + upiId + "'");
                 System.out.println("Payment successful! Thank you for your order.");
                 break;
             case 3:
@@ -126,7 +167,7 @@ public class MealOrderingSystem {
                 }
             }
             order.displayOrder();
-            pay.payBill(order.getTotal());
+            pay.payBill(order.getTotal(), order.getOptionPay());
 
         }
     }
