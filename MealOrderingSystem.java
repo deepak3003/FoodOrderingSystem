@@ -23,34 +23,33 @@ class Order {
     private double total = 0;
     private int optionPay = 0;
 
-    public void addItem(int choice) {
+    public void addItem(int choice, int quantity) {
         switch (choice) {
             case 1:
-                total += 50;
-                System.out.println("You added a Burger");
-                orders.add("Burger");
+                total += 50 * quantity;
+                System.out.println("You added " + quantity + " Burger");
+                orders.add(quantity + " x Burger");
                 break;
             case 2:
-                total += 80;
-                System.out.println("You added a Pizza");
-                orders.add("Pizza");
+                total += 80 * quantity;
+                System.out.println("You added " + quantity + " Pizza");
+                orders.add(quantity + " x Pizza");
                 break;
             case 3:
-                total += 40;
-                System.out.println("You added a Sandwich");
-                orders.add("Sandwich");
+                total += 40 * quantity;
+                System.out.println("You added " + quantity + " Sandwich");
+                orders.add(quantity + " x Sandwich");
                 break;
             case 4:
-                total += 20;
-                System.out.println("You added a Coke");
-                orders.add("Coke");
+                total += 20 * quantity;
+                System.out.println("You added " + quantity + " Coke");
+                orders.add(quantity + " x Coke");
                 break;
-
-
             default:
                 System.out.println("Invalid selection.");
         }
     }
+
 
     public double getTotal() {
         return total;
@@ -158,7 +157,11 @@ public class MealOrderingSystem {
                 if (choice == 5) {
                     break;
                 }
-                order.addItem(choice);
+                System.out.print("Enter quantity for this item: ");
+                int quantity = sc.nextInt();
+                order.addItem(choice, quantity);
+
+
                 sc.nextLine();
                 System.out.println("Would you like to order anything else? (y/n)");
                 String userResponse = sc.nextLine();
