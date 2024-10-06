@@ -1,0 +1,6 @@
+# Specify that .java files are Java
+*.java linguist-language=Java
+
+# Treat any C/C++ files as vendored
+*.c linguist-vendored
+*.cpp linguist-vendored
