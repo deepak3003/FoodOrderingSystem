@@ -9,19 +9,24 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 class Menu {
     public void displayMenu() {
-        System.out.println("1. Burger - ₹50.00");
-        System.out.println("2. Pizza - ₹80.00");
-        System.out.println("3. Sandwich - ₹40.00");
-        System.out.println("4. Coke - ₹20.00");
-        System.out.println("5. Exit");
+        System.out.println(" ── ── ── ── ── ── ── MENU ── ── ── ── ── ── ──");
+        System.out.println("|                                               |");
+        System.out.println("|    1. BURGER ₹50.00     2. PIZZA ₹80.00       |");
+        System.out.println("|                                               |");
+        System.out.println("|    3. SANDWICH ₹50.00   4. COKE ₹80.00        |");
+        System.out.println("|                                               |");
+        System.out.println("|    5. EXIT                                    |");
+        System.out.println("|                                               |");
+        System.out.println(" ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──");
 
     }
 }
 
 class Order {
+    ApplyCoupon ac = new ApplyCoupon();
     private final List<String> orders = new ArrayList<>();
     private double total = 0;
-    private int optionPay = 0;
+    public static int optionPay = 0;
 
     public void addItem(int choice, int quantity) {
         switch (choice) {
@@ -63,11 +68,15 @@ class Order {
         System.out.print("You ordered a ");
         System.out.println(orders);
         System.out.println("Your total is: ₹" + total);
-        total = applyCoupon(total);
+        total = ac.applyCoupon(total);
         System.out.println("Total after applying coupon ₹" + total);
 
     }
 
+
+}
+
+class ApplyCoupon{
     public double applyCoupon(double total) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Choose coupon");
@@ -86,11 +95,11 @@ class Order {
 
             case 2:
                 total = total - 20;  //Flat ₹20 off
-                optionPay = 2;
+                Order.optionPay = 2;
                 break;
             case 3:
                 total = total - Math.min((total * 35) / 100, 100);  //35% off up to ₹100
-                optionPay = 3;
+                Order.optionPay = 3;
                 break;
             default:
                 System.out.println("Invalid coupon selection. No coupon applied.");
@@ -125,7 +134,7 @@ class Payment {
             case 3:
                 System.out.print("Enter your card number: ");
                 String cardNumber = sc.nextLine();
-                System.out.print("Enter expiration date MM/YY: ");
+                System.out.print("Enter expire date MM/YY: ");
                 String expireDate = sc.nextLine();
                 System.out.print("Enter CVC number: ");
                 String cvcNumber = sc.nextLine();
@@ -142,11 +151,22 @@ class Payment {
     }
 }
 
+class Feedback {
+    Scanner sc = new Scanner(System.in);
+
+    public void feedback() {
+        System.out.println("Please rate our services from out of 5.");
+        int response = sc.nextInt();
+        System.out.println("Thank you for providing your rating.");
+    }
+}
+
 public class MealOrderingSystem {
     public static void main(String[] args) {
         Menu menu = new Menu();
         Order order = new Order();
         Payment pay = new Payment();
+        Feedback feed = new Feedback();
         try (Scanner sc = new Scanner(System.in)) {
             AtomicBoolean orderMore = new AtomicBoolean(true);
 
@@ -171,6 +191,7 @@ public class MealOrderingSystem {
             }
             order.displayOrder();
             pay.payBill(order.getTotal(), order.getOptionPay());
+            feed.feedback();
 
         }
     }
