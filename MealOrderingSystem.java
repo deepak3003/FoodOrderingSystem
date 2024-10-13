@@ -13,7 +13,7 @@ class Menu {
         System.out.println("|                                               |");
         System.out.println("|    1. BURGER ₹50.00     2. PIZZA ₹80.00       |");
         System.out.println("|                                               |");
-        System.out.println("|    3. SANDWICH ₹50.00   4. COKE ₹80.00        |");
+        System.out.println("|    3. SANDWICH ₹40.00   4. COKE ₹20.00        |");
         System.out.println("|                                               |");
         System.out.println("|    5. EXIT                                    |");
         System.out.println("|                                               |");
