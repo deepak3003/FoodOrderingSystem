@@ -5,20 +5,56 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
 class Menu {
     public void displayMenu() {
         System.out.println(" ── ── ── ── ── ── ── MENU ── ── ── ── ── ── ──");
         System.out.println("|                                               |");
-        System.out.println("|    1. BURGER ₹50.00     2. PIZZA ₹80.00       |");
+        System.out.println("|    1. BURGER            2. PIZZA              |");
         System.out.println("|                                               |");
-        System.out.println("|    3. SANDWICH ₹40.00   4. COKE ₹20.00        |");
+        System.out.println("|    3. SANDWICH          4. COKE               |");
         System.out.println("|                                               |");
         System.out.println("|    5. EXIT                                    |");
         System.out.println("|                                               |");
         System.out.println(" ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──");
 
     }
+
+    public void displayBurger() {
+        System.out.println("Available Burgers:");
+        System.out.println("1. Classic Burger - ₹150");
+        System.out.println("2. Chicken Burger - ₹120");
+        System.out.println("3. Veggie Burger - ₹100");
+        System.out.println("4. Cheese Burger - ₹130");
+    }
+
+    public void displayPizza() {
+        System.out.println("Available Pizzas:");
+        System.out.println("1. Margherita - ₹200");
+        System.out.println("2. Pepperoni - ₹250");
+        System.out.println("3. BBQ Chicken - ₹280");
+        System.out.println("4. Veggie Supreme - ₹220");
+        System.out.println("5. Hawaiian - ₹240");
+    }
+
+    public void displaySandwich() {
+        System.out.println("Available Sandwiches:");
+        System.out.println("1. Chicken Sandwich - ₹80");
+        System.out.println("2. Veggie Sandwich - ₹70");
+        System.out.println("3. Grilled Cheese Sandwich - ₹90");
+        System.out.println("4. Turkey Sandwich - ₹110");
+        System.out.println("5. BLT Sandwich - ₹100");
+    }
+
+    public void displayCoke() {
+        System.out.println("Available Coke Options:");
+        System.out.println("1. Coca-Cola Classic - ₹40");
+        System.out.println("2. Diet Coke - ₹45");
+        System.out.println("3. Coca-Cola Zero Sugar - ₹50");
+        System.out.println("4. Cherry Coke - ₹55");
+        System.out.println("5. Vanilla Coke - ₹60");
+    }
+
+
 }
 
 class Order {
@@ -27,30 +63,129 @@ class Order {
     private double total = 0;
     public static int optionPay = 0;
 
-    public void addItem(int choice, int quantity) {
+    public void addItem(int choice, int itemChoice, int quantity) {
         switch (choice) {
-            case 1:
-                total += 50 * quantity;
-                System.out.println("You added " + quantity + " Burger");
-                orders.add(quantity + " x Burger");
+            case 1: // Burger
+                switch (itemChoice) {
+                    case 1:
+                        total += 150 * quantity;
+                        System.out.println("You added " + quantity + " Classic Burger(s)");
+                        orders.add(quantity + " x Classic Burger");
+                        break;
+                    case 2:
+                        total += 120 * quantity;
+                        System.out.println("You added " + quantity + " Chicken Burger(s)");
+                        orders.add(quantity + " x Chicken Burger");
+                        break;
+                    case 3:
+                        total += 100 * quantity;
+                        System.out.println("You added " + quantity + " Veggie Burger(s)");
+                        orders.add(quantity + " x Veggie Burger");
+                        break;
+                    case 4:
+                        total += 130 * quantity;
+                        System.out.println("You added " + quantity + " Cheese Burger(s)");
+                        orders.add(quantity + " x Cheese Burger");
+                        break;
+                    default:
+                        System.out.println("Invalid burger selection.");
+                }
                 break;
-            case 2:
-                total += 80 * quantity;
-                System.out.println("You added " + quantity + " Pizza");
-                orders.add(quantity + " x Pizza");
+            case 2: // Pizza
+                switch (itemChoice) {
+                    case 1:
+                        total += 200 * quantity;
+                        System.out.println("You added " + quantity + " Margherita Pizza(s)");
+                        orders.add(quantity + " x Margherita Pizza");
+                        break;
+                    case 2:
+                        total += 250 * quantity;
+                        System.out.println("You added " + quantity + " Pepperoni Pizza(s)");
+                        orders.add(quantity + " x Pepperoni Pizza");
+                        break;
+                    case 3:
+                        total += 280 * quantity;
+                        System.out.println("You added " + quantity + " BBQ Chicken Pizza(s)");
+                        orders.add(quantity + " x BBQ Chicken Pizza");
+                        break;
+                    case 4:
+                        total += 220 * quantity;
+                        System.out.println("You added " + quantity + " Veggie Supreme Pizza(s)");
+                        orders.add(quantity + " x Veggie Supreme Pizza");
+                        break;
+                    case 5:
+                        total += 240 * quantity;
+                        System.out.println("You added " + quantity + " Hawaiian Pizza(s)");
+                        orders.add(quantity + " x Hawaiian Pizza");
+                        break;
+                    default:
+                        System.out.println("Invalid pizza selection.");
+                }
                 break;
-            case 3:
-                total += 40 * quantity;
-                System.out.println("You added " + quantity + " Sandwich");
-                orders.add(quantity + " x Sandwich");
+            case 3: // Sandwich
+                switch (itemChoice) {
+                    case 1:
+                        total += 80 * quantity;
+                        System.out.println("You added " + quantity + " Chicken Sandwich(es)");
+                        orders.add(quantity + " x Chicken Sandwich");
+                        break;
+                    case 2:
+                        total += 70 * quantity;
+                        System.out.println("You added " + quantity + " Veggie Sandwich(es)");
+                        orders.add(quantity + " x Veggie Sandwich");
+                        break;
+                    case 3:
+                        total += 90 * quantity;
+                        System.out.println("You added " + quantity + " Grilled Cheese Sandwich(es)");
+                        orders.add(quantity + " x Grilled Cheese Sandwich");
+                        break;
+                    case 4:
+                        total += 110 * quantity;
+                        System.out.println("You added " + quantity + " Turkey Sandwich(es)");
+                        orders.add(quantity + " x Turkey Sandwich");
+                        break;
+                    case 5:
+                        total += 100 * quantity;
+                        System.out.println("You added " + quantity + " BLT Sandwich(es)");
+                        orders.add(quantity + " x BLT Sandwich");
+                        break;
+                    default:
+                        System.out.println("Invalid sandwich selection.");
+                }
                 break;
-            case 4:
-                total += 20 * quantity;
-                System.out.println("You added " + quantity + " Coke");
-                orders.add(quantity + " x Coke");
+            case 4: // Coke
+                switch (itemChoice) {
+                    case 1:
+                        total += 40 * quantity;
+                        System.out.println("You added " + quantity + " Coca-Cola Classic(s)");
+                        orders.add(quantity + " x Coca-Cola Classic");
+                        break;
+                    case 2:
+                        total += 45 * quantity;
+                        System.out.println("You added " + quantity + " Diet Coke(s)");
+                        orders.add(quantity + " x Diet Coke");
+                        break;
+                    case 3:
+                        total += 50 * quantity;
+                        System.out.println("You added " + quantity + " Coca-Cola Zero Sugar(s)");
+                        orders.add(quantity + " x Coca-Cola Zero Sugar");
+                        break;
+                    case 4:
+                        total += 55 * quantity;
+                        System.out.println("You added " + quantity + " Cherry Coke(s)");
+                        orders.add(quantity + " x Cherry Coke");
+                        break;
+                    case 5:
+                        total += 60 * quantity;
+                        System.out.println("You added " + quantity + " Vanilla Coke(s)");
+                        orders.add(quantity + " x Vanilla Coke");
+                        break;
+                    default:
+                        System.out.println("Invalid coke selection.");
+                }
                 break;
             default:
-                System.out.println("Invalid selection.");
+                System.out.println("Invalid category selection.");
         }
     }
 
@@ -75,7 +210,7 @@ class Order {
 
 }
 
-class ApplyCoupon{
+class ApplyCoupon {
     public double applyCoupon(double total) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Choose coupon");
@@ -172,20 +307,36 @@ public class MealOrderingSystem {
             while (orderMore) {
                 menu.displayMenu();
                 System.out.print("Please select an item (1-5): ");
-                int choice = sc.nextInt();
-                if (choice == 5) {
+                int typechoice = sc.nextInt();
+                if (typechoice == 5) {
                     break;
                 }
+
+                switch (typechoice) {
+                    case 1:
+                        menu.displayBurger();
+                        break;
+                    case 2:
+                        menu.displayPizza();
+                        break;
+                    case 3:
+                        menu.displayCoke();
+                        break;
+                    case 4:
+                        menu.displaySandwich();
+                }
+                System.out.print("Choose an item: ");
+                int itemChoice = sc.nextInt();
                 System.out.print("Enter quantity for this item: ");
                 int quantity = sc.nextInt();
-                order.addItem(choice, quantity);
+                order.addItem(typechoice, itemChoice, quantity);
 
 
                 sc.nextLine();
                 System.out.println("Would you like to order anything else? (y/n)");
                 String userResponse = sc.nextLine();
                 if (userResponse.equalsIgnoreCase("n")) {
-                    orderMore= false;
+                    orderMore = false;
                 }
             }
             order.displayOrder();
