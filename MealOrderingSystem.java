@@ -1,10 +1,9 @@
 package FoodOrderingSystem;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 
 
 class Menu {
@@ -168,9 +167,9 @@ public class MealOrderingSystem {
         Payment pay = new Payment();
         Feedback feed = new Feedback();
         try (Scanner sc = new Scanner(System.in)) {
-            AtomicBoolean orderMore = new AtomicBoolean(true);
+            boolean orderMore = true;
 
-            while (orderMore.get()) {
+            while (orderMore) {
                 menu.displayMenu();
                 System.out.print("Please select an item (1-5): ");
                 int choice = sc.nextInt();
@@ -186,7 +185,7 @@ public class MealOrderingSystem {
                 System.out.println("Would you like to order anything else? (y/n)");
                 String userResponse = sc.nextLine();
                 if (userResponse.equalsIgnoreCase("n")) {
-                    orderMore.set(false);
+                    orderMore= false;
                 }
             }
             order.displayOrder();
